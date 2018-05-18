@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import Message from "./Message";
-import NewMessageEntry from "./NewMessageEntry";
-import axios from "axios";
-import { connect } from "react-redux";
-import { fetchMessages } from "../store";
+import React, { Component } from 'react';
+import Message from './Message';
+import NewMessageEntry from './NewMessageEntry';
+import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchMessages } from '../store';
 
 class MessagesList extends Component {
   componentDidMount() {
@@ -12,7 +12,6 @@ class MessagesList extends Component {
 
   render() {
     const channelId = Number(this.props.match.params.channelId); // because it's a string "1", not a number!
-    console.log(this.props);
     const messages = this.props.messages;
     const filteredMessages = messages.filter(
       message => message.channelId === channelId
@@ -25,7 +24,7 @@ class MessagesList extends Component {
             <Message message={message} key={message.id} />
           ))}
         </ul>
-        <NewMessageEntry />
+        <NewMessageEntry channelId={channelId} />
       </div>
     );
   }
@@ -37,7 +36,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchInitialMessages: () => dispatch(fetchMessages())
+    fetchInitialMessages: () => dispatch(fetchMessages()),
   };
 };
 
